@@ -1,0 +1,18 @@
+modules:
+  bitbucket:repoCodeOverviewCard:
+    - key: hello-bitbucket-hello-world-repository-code-overview-card
+      resource: main
+      resolver:
+        function: resolver
+      render: native
+      title: hello-bitbucket
+  function:
+    - key: resolver
+      handler: index.handler
+resources:
+  - key: main
+    path: src/frontend/index.jsx
+app:
+  runtime:
+    name: nodejs20.x
+  id: ari:cloud:ecosystem::app/9308d90b-544c-4f76-9471-27abbdbf482b
