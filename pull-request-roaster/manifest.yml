@@ -1,7 +1,15 @@
+environment:
+  variables:
+    - 'FORGE_APP_ID'
+    - 'REMOTE_BACKEND_URL'
+    - 'REMOTE_BACKEND_DEV_URL'
+
 permissions:
   scopes:
+    - read:app-user-token
     - read:app-system-token
     - read:pullrequest:bitbucket
+
 modules:
   bitbucket:mergeCheck:
     - key: pull-request-roaster-merge-check
@@ -13,16 +21,29 @@ modules:
   function:
     - key: main
       handler: index.run
+
 app:
   runtime:
     name: nodejs20.x
-  id: ari:cloud:ecosystem::app/be8e72a5-fb19-48e2-b608-5a09ceb15034
+  id: ${FORGE_APP_ID}
 
 remotes:
-  - key: mi-corazon
-    baseUrl: https://mi-corazon.fly.dev
+  - key: remote-backend
+    baseUrl: ${REMOTE_BACKEND_URL}
     operations:
       - compute
     auth:
       appSystemToken:
+        enabled: true
+      appUserToken:
+        enabled: true
+
+  - key: remote-backend-dev
+    baseUrl: ${REMOTE_BACKEND_DEV_URL}
+    operations:
+      - compute
+    auth:
+      appSystemToken:
+        enabled: true
+      appUserToken:
         enabled: true

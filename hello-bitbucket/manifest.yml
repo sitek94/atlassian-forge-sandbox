@@ -9,10 +9,15 @@ modules:
   function:
     - key: resolver
       handler: index.handler
+
 resources:
   - key: main
     path: src/frontend/index.jsx
+
 app:
   runtime:
     name: nodejs20.x
-  id: ari:cloud:ecosystem::app/9308d90b-544c-4f76-9471-27abbdbf482b
+  id: ${FORGE_APP_ID}
+
+environment:
+  variables: 'FORGE_APP_ID'
